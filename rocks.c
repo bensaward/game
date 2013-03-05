@@ -13,11 +13,12 @@ int buffer_init();
 int buffer_update();
 int buffer_print();
 int screen_init();
+
 int buffer_init()
 {
   for (int i=0; i<bin_number; i++)
   {
-    bin_array=0;
+    bin_array[i]=0;
   }
 }
 
@@ -31,11 +32,15 @@ int screen_init()
     printf("\033[1;%dH%d", triple_i, n);
     n++;
   }
+}
+
+
+buffer_update()
+{
+  int random=rand_int(random_min, random_max), array_number=random-1;
+  bin_array[array_number]++;
+}
   
 int main ()
 {
-  for (;;)
-  {
-    int random = rand_int()
-  }
 }
