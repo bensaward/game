@@ -37,7 +37,7 @@ int screen_init()
 
 buffer_update()
 {
-  int random=rand_int(random_min, random_max), array_number=random-1;
+  int random=rand_int(random_min, random_max), array_number=random-random_min;
   bin_array[array_number]++;
 }
   
