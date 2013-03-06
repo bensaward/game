@@ -11,8 +11,7 @@
 int bin_array[bin_number];
 void buffer_init();
 void buffer_update();
-int buffer_print();
-void screen_init();
+void screen_print();
 
 void buffer_init()
 {
@@ -22,14 +21,14 @@ void buffer_init()
   }
 }
 
-void screen_init()
+void screen_print()
 {
-  int n=random_min, triple_i;
+  int n=0, triple_i;
   for (int i=random_min; i<=random_max; i++)
   {
     triple_i=i*3;
     printf("\033[2;%dH%d", triple_i, i);
-    printf("\033[1;%dH%d", triple_i, n);
+    printf("\033[1;%dH%d", triple_i, bin_array[n]);
     n++;
   }
 }
@@ -37,10 +36,20 @@ void screen_init()
 
 void buffer_update()
 {
-  int random=rand_int(random_min, random_max), array_number=random-random_min;
+  int random=rand_int(random_min, random_max);
+  int array_number=random-random_min;
   bin_array[array_number]++;
 }
-  
+
 int main ()
 {
+	srand(0);
+	buffer_init();
+	screen_print();
+	for (;;)
+	{
+	  	buffer_update();
+	 	screen_print();
+	}
+	exit (0);
 }
