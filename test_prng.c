@@ -1,11 +1,11 @@
 // rocks.c test for uniformity of prng
 
-#include </mnt/sdcard/Documents/game/rocks.h>
+#include </home/ben/code/game/rocks.h>
 #include <stdio.h>
 #include <time.h>
 
-#define random_max 9
-#define random_min 0
+#define random_max 30
+#define random_min 1
 #define bin_number (random_max-random_min)+1
 
 int bin_array[bin_number];
@@ -26,7 +26,7 @@ void screen_print()
   int n=0, triple_i;
   for (int i=random_min; i<=random_max; i++)
   {
-    triple_i=i*3;
+    triple_i=i*5;
     printf("\033[2;%dH%d", triple_i, i);
     printf("\033[1;%dH%d", triple_i, bin_array[n]);
     n++;
@@ -44,9 +44,11 @@ void buffer_update()
 int main ()
 {
 	srand(0);
+	system("clear");
 	buffer_init();
 	screen_print();
-	for (;;)
+	int max=60000;
+	for (int i=0; i<max; i++)
 	{
 	  	buffer_update();
 	 	screen_print();
