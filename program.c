@@ -1,15 +1,37 @@
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
+#include <string.h>
 
 #define array_width 40
 #define array_height 20
+
+char* get_username(void);
+void get_config(void);
+void update_coords(int key);
+void print(int x, int y);
+void redraw_screen();
+void draw_screen();
 
 unsigned short char_printed;
 int coordinate_x=array_width/2, coordinate_y=array_height/2, coordinate_height=0; /* defaults for spawn in top left of array at layer 0 */
 int old_x, old_y;
 
+char* get_username(void)
+{
+ char *uname;
+ uname=getlogin();
+ return (uname);
+}
 
+void get_config (void)
+{
+  char username[30]=get_username();
+  char home[]="/home/";
+  char game_folder[]="/.game/config.txt";
+  char file_address[strlen(home)+strlen(game_folder)+strlen(username)];
+}
+  
 int getch(void)
 {
   struct termios oldattr, newattr;
@@ -134,6 +156,7 @@ void draw_screen ()
 
 int main ()
 {
+  get_username();
   draw_screen();
   int character_pressed;
   for(;;)
