@@ -17,19 +17,17 @@ unsigned short char_printed;
 int coordinate_x=array_width/2, coordinate_y=array_height/2, coordinate_height=0; /* defaults for spawn in top left of array at layer 0 */
 int old_x, old_y;
 
-char* get_username(void)
-{
- char *uname;
- uname=getlogin();
- return (uname);
-}
-
 void get_config (void)
 {
-  char username[30]=get_username();
-  char home[]="/home/";
-  char game_folder[]="/.game/config.txt";
-  char file_address[strlen(home)+strlen(game_folder)+strlen(username)];
+  char *username;
+  username=getlogin();
+  puts(username);
+  username="ben";
+  char file_address[strlen(username)+6+17+1];
+  strcat(file_address, "/home/");
+  strcat(file_address, username);
+  strcat(file_address, "/.game/config.txt");
+  printf("%c", file_address);
 }
   
 int getch(void)
@@ -156,13 +154,14 @@ void draw_screen ()
 
 int main ()
 {
-  get_username();
-  draw_screen();
-  int character_pressed;
+  //draw_screen();
+  //int character_pressed;
+  get_config();
+  
   for(;;)
   {
-    character_pressed=getch();
-    update_coords(character_pressed);
-    redraw_screen();
+    //character_pressed=getch();
+    //update_coords(character_pressed);
+    //redraw_screen();
   }
 }
