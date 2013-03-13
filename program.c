@@ -21,13 +21,25 @@ void get_config (void)
 {
   char *username;
   username=getlogin();
-  puts(username);
-  username="ben";
-  char file_address[strlen(username)+6+17+1];
+  char uname[20];
+  for (int i=0; i<sizeof(uname); i++)
+  {
+    uname[i]=username[i];
+  }
+  char file_address[100];
   strcat(file_address, "/home/");
-  strcat(file_address, username);
+  strcat(file_address, uname);
   strcat(file_address, "/.game/config.txt");
-  printf("%c", file_address);
+  FILE *config;
+  char buffer[1000];
+  config = fopen(file_address, "r");
+  if (config==NULL)
+  {
+    printf("Error opening config file");
+    exit 0;
+  }
+  else
+  
 }
   
 int getch(void)
@@ -154,14 +166,14 @@ void draw_screen ()
 
 int main ()
 {
-  //draw_screen();
-  //int character_pressed;
+  draw_screen();
+  int character_pressed;
   get_config();
   
   for(;;)
   {
-    //character_pressed=getch();
-    //update_coords(character_pressed);
-    //redraw_screen();
+    character_pressed=getch();
+    update_coords(character_pressed);
+    redraw_screen();
   }
 }
