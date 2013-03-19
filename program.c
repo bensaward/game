@@ -2,6 +2,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define array_width 40
 #define array_height 20
@@ -16,32 +17,53 @@ void draw_screen();
 unsigned short char_printed;
 int coordinate_x=array_width/2, coordinate_y=array_height/2, coordinate_height=0; /* defaults for spawn in top left of array at layer 0 */
 int old_x, old_y;
+char up_key, down_key, left_key, right_key;
 
 void get_config (void)
 {
   char *username;
   username=getlogin();
-  char uname[20];
-  for (int i=0; i<sizeof(uname); i++)
-  {
-    uname[i]=username[i];
-  }
-  char file_address[100];
-  strcat(file_address, "/home/");
-  strcat(file_address, uname);
-  strcat(file_address, "/.game/config.txt");
+  char file_address[100]="/home/", file_name[]="/.game/config.txt";
+  strncat(file_address, username, sizeof(file_address));
+  strncat(file_address, file_name, sizeof(file_address));
   FILE *config;
   char buffer[1000];
-  config = fopen(file_address, "r");
+  config = fopen(file_address, "rt");
   if (config==NULL)
   {
-    printf("Error opening config file");
-    exit 0;
+    printf("\033[%d;1HError opening config file", array_height+10);
+    exit(1);
   }
   else
-  
+  {
+    while(fgets(buffer, sizeof(buffer), config) != NULL)
+    {
+      char token1[20], token2[10];
+      sscanf(buffer, "%s %[^, ]%*[ ]%s", token1, token2);
+      if(strncmp(token1, "up", sizeof(token1)) == 0)
+      {
+	up_key=token2[0];
+      }
+      
+      if (strncmp(token1, "down", sizeof(token1)) == 0)
+      {
+	down_key=token2[0];
+      }
+      
+      if (strncmp(token1, "right", sizeof(token1)) == 0)
+      {
+	right_key=token2[0];
+      }
+      
+      if (strncmp(token1, "left", sizeof(token1)) == 0)
+      {
+	left_key=token2[0];	
+      }  
+    }
+    fclose(config);
+  }
 }
-  
+
 int getch(void)
 {
   struct termios oldattr, newattr;
@@ -59,51 +81,35 @@ void update_coords (int key)
 {
   old_x=coordinate_x;
   old_y=coordinate_y;
-  
-  switch (key)
+  if (key==up_key)
   {
-    case 'w':
-      if(coordinate_y==1)
-      {
-	break;
-      }
-      else
-      {
-	coordinate_y--;
-	break;
-      }
-    
-    case 'a': 
-      if (coordinate_x==1)
-      {
-	break;	
-      }
-      else
-      {
-	coordinate_x--;
-	break;
-      }
+    if(coordinate_y!=1)
+    {
+      coordinate_y--;
+    }
+  }
+  
+  if(key==left_key)
+  {   
+    if (coordinate_x!=1)
+    {
+      coordinate_x--;  
+    }
+  }
+  
+  if(key==down_key)
+  {
+    if (coordinate_y!=array_height)
+    {
+      coordinate_y++;
+    }
+  }
 
-    case 's':
-      if (coordinate_y==array_height)
-      {
-	break;	
-      }
-      else
-      {
-	coordinate_y++;
-	break;
-      }
-
-    case 'd':
-      if (coordinate_x==array_width)
-      {
-	break;
-      }
-      else
+  if(key==right_key)
+  {
+    if (coordinate_x!=array_width)
       {
 	coordinate_x++;
-	break;
       }    
   }
 }
@@ -147,6 +153,7 @@ void redraw_screen ()
 
 void draw_screen ()
 {
+  system("clear");
   for (int y=1; y<=array_height; y++)
   {
     for (int x=1; x<=array_width; x++)
