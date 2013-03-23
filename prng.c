@@ -1,17 +1,4 @@
-/* rocks.h used for generating rocks for program.c
- *
- * put any test code in here ready to be transferred to program.c
- *
- */
-#ifndef _ROCKS_H_
-#define _ROCKS_H_
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-void rocks_init(int x, int y, int x_max, int y_max);
-int rand_int(unsigned int min, unsigned int max);
+#include </home/ben/code/game/main.h>
 
 int rand_int(unsigned int min, unsigned int max)
 {
@@ -37,5 +24,3 @@ int rand_int(unsigned int min, unsigned int max)
     }
   }
 }
-
-#endif
