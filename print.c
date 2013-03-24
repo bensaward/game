@@ -110,3 +110,13 @@ void draw_screen ()
   }
   printf("\033[%d;1H>> ", array_height+3);  
 }
+
+void print_menu()
+{
+  
+}
+
+void redraw_menu()
+{
+  
+}
