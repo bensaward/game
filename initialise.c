@@ -5,6 +5,12 @@
 #include <stdlib.h>
 #include </home/ben/code/game/main.h>
 
+void init_coords (void)
+{
+  coordinate_x=init_coordinate_x;
+  coordinate_y=init_coordinate_y;
+}
+
 void get_config (void)
 {
   char *username;

@@ -3,8 +3,14 @@
 #include <stdlib.h>
 #include </home/ben/code/game/main.h>
 
+/* 
+ * See main.h for defining array size etc
+ * Functions are found in various *.c files
+ */
+
 int main()
 {
+  init_coords();
   draw_screen();
   int character_pressed;
   get_config();
