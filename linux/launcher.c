@@ -5,10 +5,8 @@
 
 int main()
 {
-  char array_height_char[3], array_width_char[3];
   snprintf(array_height_char, sizeof(array_height_char), "%d", array_height+10);
   snprintf(array_width_char, sizeof(array_width_char), "%d", array_width);
-  char cwd[100];
   getcwd(cwd, sizeof(cwd));
   char game_file[]="/game";
   strncat(cwd, game_file, sizeof(cwd));
