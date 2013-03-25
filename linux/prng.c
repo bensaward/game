@@ -1,4 +1,4 @@
-#include </home/ben/code/game/main.h>
+#include <main.h>
 
 int rand_int(unsigned int min, unsigned int max)
 {

@@ -1,4 +1,4 @@
-#include </home/ben/code/game/main.h>
+#include <main.h>
 
 void loop_campaign()
 {

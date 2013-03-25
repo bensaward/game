@@ -1,5 +1,5 @@
 #ifndef array_width
-#define array_width 40
+#define array_width 60
 #endif
 
 #ifndef array_height

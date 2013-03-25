@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include </home/ben/code/game/main.h>
+#include <main.h>
 
 int getch(void)
 {

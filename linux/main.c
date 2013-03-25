@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include </home/ben/code/game/main.h>
+#include <main.h>
 
 /* 
  * See main.h for defining array size etc.
@@ -9,7 +9,7 @@
  * Also see main.h for which *.c files.
  */
 
-int main()
+int main(int argc, char *argv[])
 {
   cursor_char='<';
   loop_menu();
