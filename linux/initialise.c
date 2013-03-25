@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
-#include </home/ben/code/game/main.h>
+#include <main.h>
 
 void init_coords (void)
 {
