@@ -4,7 +4,6 @@ void loop_campaign()
 {
   init_coords();
   draw_screen();
-  int character_pressed;
   get_config();
   
   for(;;)
@@ -17,5 +16,10 @@ void loop_campaign()
 
 void loop_menu()
 {
-  
+  print_menu();
+  for(;;)
+  {
+    character_pressed=getch();
+    update_cursor(character_pressed);
+  }
 }

@@ -11,6 +11,6 @@
 
 int main()
 {
-  print_menu();
-  redraw_menu();
+  cursor_char='<';
+  loop_menu();
 }
