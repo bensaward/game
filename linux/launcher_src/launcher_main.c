@@ -1,9 +1,9 @@
 #include <main.h>
 #include <unistd.h>
 #include <main.h>
-#include <launcher.h>
+#include <launcher_src/launcher.h>
 
-int main()
+void exec_gnome_terminal(void)
 {
   snprintf(array_height_char, sizeof(array_height_char), "%d", array_height+10);
   snprintf(array_width_char, sizeof(array_width_char), "%d", array_width);
@@ -17,4 +17,9 @@ int main()
   strncat(command, " -e ", sizeof(command));
   strncat(command, cwd, sizeof(command));
   system(command);
+}
+
+int main(int argc, char *argv[])
+{
+  init_window(argc, argv);
 }
