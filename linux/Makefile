@@ -1,6 +1,6 @@
 CC=gcc
 WD=$(shell pwd)
-CFLAGS=--std=c99 -I$(WD) -lgtk -lgdk -lX11 `pkg-config --cflags --libs gtk+-2.0`
+CFLAGS=--std=c99 -I$(WD) `pkg-config --cflags --libs gtk+-2.0`
 SOURCES=initialise.c loops.c main.c print.c prng.c
 L_FOLDER=launcher_src/
 L_SOURCES=$(L_FOLDER)launcher_main.c $(L_FOLDER)launcher_initialise.c
