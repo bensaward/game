@@ -1,3 +1,11 @@
+#ifndef button_width
+#define button_width 80
+#endif
+
+#ifndef button_height
+#define button_height 40
+#endif
+
 #ifndef launcher_height
 #define launcher_height 200
 #endif
@@ -15,7 +23,7 @@
 #include <gtk/gtk.h>
 
 //global vars
-char array_height_char[3], array_width_char[3], cwd[100];
+char array_height_char[3], array_width_char[3], cwd[100], geometry[100];
 GtkWidget *launcher;
 GtkWidget *play_button;
 GtkWidget *launcher_container;

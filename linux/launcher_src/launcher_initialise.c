@@ -17,9 +17,8 @@ void init_window(int argc, char *argv[])
 void button_init(void)
 {
   play_button=gtk_button_new_with_label("Play!");
-  gtk_widget_set_size_request(play_button, 80, 40);
-  int button_height=launcher_height/2, button_width=launcher_width/2;
-  gtk_fixed_put(GTK_FIXED(launcher_container), play_button, launcher_width/2, launcher_height/2);
-  g_signal_connect(play_button, "clicked", G_CALLBACK(game_play), NULL);
+  gtk_widget_set_size_request(play_button, button_width, button_height);
+  gtk_fixed_put(GTK_FIXED(launcher_container), play_button, (launcher_width/2)-(button_width/2), (launcher_height/2)-(button_height/2));
+  g_signal_connect_swapped(play_button, "clicked", G_CALLBACK(exec_gnome_terminal), NULL);
 }
   
