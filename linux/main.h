@@ -27,6 +27,10 @@
 #define enter_key 10 //ascii for enter... I think...
 #endif
 
+#ifndef game_name
+#define game_name "- Game Name Here -"
+#endif
+
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
