@@ -52,8 +52,10 @@ void print_menu();  // functions from print.c here
 void print(int x, int y);
 void redraw_screen();
 void draw_screen();
-void print_n_xml(char *file_path, char *buffer, int buffer_size);
+void print_n_xml(char *file_path, int buffer_size);
 void print_terminal(void);
+void clean_terminal(void);
+void sprint_terminal(char* buffer, int size);
 
 void update_cursor(int pressed); //functions from keys.c here
 int getch (void);

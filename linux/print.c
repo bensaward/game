@@ -70,9 +70,11 @@ void print_menu()
 }
 
 
-void print_n_xml(char *file_path, char *buffer, int buffer_size)
+void print_n_xml(char *file_path, int buffer_size)
 {
+  system("clear");
   FILE *xml;
+  char buffer[buffer_size];
   int line_count=1;
   xml=fopen(file_path, "rt");
   if(xml != NULL)
@@ -98,3 +100,48 @@ void print_terminal(void)
   }
   printf("\033[%d;1H>> ", array_height+3);  
 }
+
+void clean_terminal(void)
+{
+  for (int i=4; i<array_width; i++)
+  {
+    printf("\033[%d;%dH ", array_height+3, i);
+  }
+}
+
+void sprint_terminal(char* to_print, int size)
+{
+  int char_number;
+  int number_buffers=size/(array_width-7), char_left_over=size%(array_width-7);
+  if(size>(array_width-4))
+  {
+    for (int i=0; i<number_buffers; i++)
+    {
+      clean_terminal();
+      char_number=i*(array_width-7);
+      for(int x=4; x<array_width-3; x++)
+      {
+	printf("\033[%d;%dH%c", array_height+3, x, to_print[char_number]);
+	char_number++;
+      }
+      printf("\033[%d;%dH...", array_height+3, array_width-3);
+      int key_pressed=getch();
+      wait_for_enter(key_pressed);
+    }
+    clean_terminal();
+    for (int i=0; i<char_left_over; i++)
+    { 
+      printf("\033[%d;%dH%c", array_height+3, i+4, to_print[char_number]);
+      char_number++;
+    }
+  }
+  else
+  {
+    clean_terminal();
+    for (int i=0; i<sizeof(to_print); i++)
+    {
+      printf("\033[%d;%dH%c", array_height+3, i+4, to_print[i]);
+    }
+  }
+}
+    
