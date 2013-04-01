@@ -47,20 +47,26 @@ int old_x, old_y, coordinate_x, character_pressed, coordinate_y, cursor_y;
 
 void init_coords(void);  // functions from initialise.c here
 void get_config(void);
-void update_coords(int key);
 
 void print_menu();  // functions from print.c here
-void update_cursor(int pressed);
 void print(int x, int y);
-void print_to_screen();
 void redraw_screen();
 void draw_screen();
+void print_n_xml(char *file_path, int buffer_size);
+void print_terminal(void);
+void clean_terminal(void);
+void sprint_terminal(char* buffer, int size);
+
+void update_cursor(int pressed); //functions from keys.c here
 int getch (void);
 int extended_key(int pressed);
+void update_coords(int key);
+int wait_for_enter(int key);
 
 int rand_int(unsigned int min, unsigned int max); // functions from prng.c here
 
 void loop_campaign(); // functions from loops.c here
 void loop_menu();
+void intro_loop(char *campaign);
 
 #endif
