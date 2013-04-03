@@ -144,4 +144,50 @@ void sprint_terminal(char* to_print, int size)
     }
   }
 }
+
+void sprint_tok_terminal(char* to_print, int size)
+{
+  char token[size/2][16];
+  char *result;    
+  int buffer_number, total_chars=0, token_number=0, token_size[size/2], print_head=4, char_remaining, end_tok;
+ 
+  result=strtok(to_print, " ");
     
+  while (result != NULL)
+  {
+    strncpy(token[token_number], result, sizeof(token[token_number]));
+    token_size[token_number]=(strlen(token[token_number])+1);
+    total_chars+=token_size[token_number];
+    token_number++;
+    result=strtok(NULL, " ");
+  }
+  
+  if (total_chars<=(array_width-3))
+  {
+    for (int i=0; i<token_number; i++)
+    {
+      printf("\033[%d;%dH%s", array_height+3, print_head, token[i]);
+      print_head+=token_size[i];
+    }
+  }
+  else
+  {
+    int word_number=0;
+    while (word_number<token_number)
+    {
+      clean_terminal();
+      print_head=4;
+      end_tok=(3+token_size[word_number]);
+      while (end_tok <=(array_width-3))
+      {
+	printf("\033[%d;%dH%s", array_height+3, print_head, token[word_number]);
+	print_head+=token_size[word_number];
+	word_number++;
+	end_tok+=token_size[word_number];
+      }
+      printf("\033[%d;%dH...", array_height+3, array_width-3);
+      int key_caught=getch();
+      wait_for_enter(key_caught);
+    }
+  }
+}
