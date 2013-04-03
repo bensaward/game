@@ -45,9 +45,8 @@ void intro_loop(char *campaign)
     }
     print_n_xml(file_address[0], array_width);
     print_terminal();
-    char test[]="This is a test.";
     char terminal_text[]="There was once a sword, used by a great king to banish the foes from his kingdom and smite his enemies in the battlefield. Rumour has it that the sword glows bright blue.";
-    sprint_terminal_testing(test, strlen(test));
+    sprint_tok_terminal(terminal_text, strlen(terminal_text));
     paused=getch();
     wait_for_enter(paused);
   }
