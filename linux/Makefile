@@ -21,3 +21,8 @@ program:
 	
 clean:
 	rm -r $(EXECUTABLE) $(LAUNCHER)
+	
+all_debug:
+	$(CC) $(CFLAGS) -ggdb $(SOURCES) -o $(EXECUTABLE)
+	$(CC) $(CFLAGS) -ggdb $(L_SOURCES) -o $(LAUNCHER)
+	
