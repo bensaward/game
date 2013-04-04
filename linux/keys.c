@@ -93,7 +93,7 @@ void update_cursor(int pressed)
       switch(cursor_y)
       {
 	case 2:
-	  loop_campaign();
+	  loop_campaign_menu();
 	  break;
 	  
 	case 4:
