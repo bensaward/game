@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <main.h>
+#include <console_interpreter.h>
 
 
 int getch(void)
@@ -52,6 +53,11 @@ void update_coords (int key)
       {
 	coordinate_x++;
       }    
+  }
+  
+  if(key==27) //code for ESC
+  {  //TODO: add escape key to the config file
+    escape_to_terminal();
   }
 }
 

@@ -1,6 +1,7 @@
 #include <main.h>
 #include <string.h>
 #include <launcher_src/launcher.h>
+#include <console_interpreter.h>
 
 void loop_campaign(char* name)
 {
@@ -57,6 +58,7 @@ void loop_campaign_menu()
 	}
 	else
 	{
+	  printf("\a");
 	  break;
 	}
       }
@@ -73,13 +75,14 @@ void loop_campaign_menu()
 	}
 	else
 	{
+	  printf("\a");
 	  break;
 	}
       }
       
       case enter_key:
       {
-	intro_loop(menu_items[(print_height/2)-1]);
+	loop_campaign(menu_items[(print_height/2)-1]);
       }
     }
   }
@@ -106,6 +109,14 @@ void intro_loop(char *campaign)
     sprint_tok_terminal(terminal_text, strlen(terminal_text));
     paused=getch();
     wait_for_enter(paused);
+  }
+  else
+  {
+    system("clear");
+    printf("\033[1;1H");
+    puts("This feature is coming soon!\n\nPress any key to return...");
+    int key_pressed=getch();
+    loop_campaign_menu();
   }
 }
     
