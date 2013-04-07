@@ -6,29 +6,38 @@
 void escape_to_terminal(void)
 {
   clean_terminal();
-  arg_count=1;
+  arg_count=0;
   char entered_commands[256], *argument, *newline;
   char error_msg[]="Argument exceeded the accepted size of 15 letters";
+  char *condition;
+  
   printf("\033[%d;4H", array_height+3);
   fgets(entered_commands, sizeof(entered_commands), stdin);
+  char entered_commands_cpy_1[strlen(entered_commands)], entered_commands_cpy_2[strlen(entered_commands)], entered_commands_cpy_3[strlen(entered_commands)], entered_commands_cpy_4[strlen(entered_commands)];
+  strncpy(entered_commands_cpy_1, entered_commands, sizeof(entered_commands_cpy_1));
   newline=strchr(entered_commands, '\n');
+  
   if (newline != NULL)
   {
-    entered_commands[newline-entered_commands]='\0';
+    entered_commands_cpy_1[newline-entered_commands]='\0';
   }
   
-  if (strchr(entered_commands, ' ') != NULL)
+  strncpy(entered_commands_cpy_2, entered_commands_cpy_1, sizeof(entered_commands_cpy_2));
+  strncpy(entered_commands_cpy_3, entered_commands_cpy_1, sizeof(entered_commands_cpy_3));
+  strncpy(entered_commands_cpy_4, entered_commands_cpy_1, sizeof(entered_commands_cpy_4));
+  
+  condition=strchr(entered_commands_cpy_2, ' ');
+  if (condition != NULL)
   {
-    argument=strtok(entered_commands, " ");
-    
+    argument=strtok(entered_commands_cpy_3, " ");
     while (argument != NULL)
     {
       arg_count++;
-      argument=(NULL, " ");
+      argument=strtok(NULL, " ");
     }
-  
+
     char argument_array[arg_count][16];
-    argument=strtok(entered_commands, " ");
+    argument=strtok(entered_commands_cpy_4, " ");
   
     for (int i=0; i<arg_count; i++)
     {
@@ -63,7 +72,7 @@ void escape_to_terminal(void)
 
 void interpret_args ( char arguments[][16], int argument_number)
 {
-  char interpreter_unrecognised[100]="Sorry I did not recognise the word(s): ";
+  char interpreter_unrecognised[200]= "Sorry I did not recognise the words: ";
   int quit;
   
   for (int i=0; i<argument_number; i++)
@@ -78,18 +87,15 @@ void interpret_args ( char arguments[][16], int argument_number)
    else
    {
      strncat(interpreter_unrecognised, arguments[i], sizeof(interpreter_unrecognised));
-     if (i==(argument_number-1))
-     {
-       sprint_tok_terminal(interpreter_unrecognised, strlen(interpreter_unrecognised));
-     }
+     strncat(interpreter_unrecognised, " ", sizeof(interpreter_unrecognised));
    }
-   
   }
+  sprint_tok_terminal(interpreter_unrecognised, strlen(interpreter_unrecognised));
 }
 
 void interpret_arg ( char *arguments)
 {
-  char interpreter_unrecognised[100]="Sorry I did not recognise the word(s): ";
+  char interpreter_unrecognised[100]="Sorry I did not recognise the word: ";
   int quit;
   
   quit=strncmp(arguments, "quit", sizeof(arguments));

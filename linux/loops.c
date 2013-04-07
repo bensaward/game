@@ -107,8 +107,6 @@ void intro_loop(char *campaign)
     print_terminal();
     char terminal_text[]="There was once a sword, used by a great king to banish the foes from his kingdom and smite his enemies in the battlefield. Rumour has it that the sword glows bright blue.";
     sprint_tok_terminal(terminal_text, strlen(terminal_text));
-    paused=getch();
-    wait_for_enter(paused);
   }
   else
   {
