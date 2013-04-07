@@ -134,6 +134,8 @@ void sprint_terminal(char* to_print, int size)
       printf("\033[%d;%dH%c", array_height+3, i+4, to_print[char_number]);
       char_number++;
     }
+    int key_pressed=getch();
+    wait_for_enter(key_pressed);
   }
   else
   {
@@ -147,6 +149,7 @@ void sprint_terminal(char* to_print, int size)
 
 void sprint_tok_terminal(char* to_print, int size)
 {
+  clean_terminal();
   char token[size/2][16];
   char *result;    
   int buffer_number, total_chars=0, token_number=0, token_size[size/2], print_head=4, char_remaining, end_tok;

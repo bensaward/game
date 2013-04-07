@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <main.h>
+#include <console_interpreter.h>
 
 
 int getch(void)
@@ -53,6 +54,11 @@ void update_coords (int key)
 	coordinate_x++;
       }    
   }
+  
+  if(key==27) //code for ESC
+  {  //TODO: add escape key to the config file
+    escape_to_terminal();
+  }
 }
 
 void update_cursor(int pressed)
@@ -93,7 +99,7 @@ void update_cursor(int pressed)
       switch(cursor_y)
       {
 	case 2:
-	  loop_campaign();
+	  loop_campaign_menu();
 	  break;
 	  
 	case 4:

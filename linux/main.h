@@ -41,7 +41,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-char up_key, down_key, left_key, right_key, cursor_char;   // Globals here
+char up_key, down_key, left_key, right_key, cursor_char, *campaign_type;   // Globals here
 unsigned short char_printed;
 int old_x, old_y, coordinate_x, character_pressed, coordinate_y, cursor_y;
 
@@ -66,8 +66,9 @@ int wait_for_enter(int key);
 
 int rand_int(unsigned int min, unsigned int max); // functions from prng.c here
 
-void loop_campaign(); // functions from loops.c here
+void loop_campaign(char* name); // functions from loops.c here
 void loop_menu();
 void intro_loop(char *campaign);
+void loop_campaign_menu();
 
 #endif
