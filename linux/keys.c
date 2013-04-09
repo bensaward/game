@@ -18,6 +18,27 @@ int getch(void)
   return ch;
 }
 
+int get_ansi_key(int array[3])
+{
+  for (int x=0; x<3; x++)
+  {
+    array[x]=0;
+  }
+  struct termios oldattr, newattr;
+  tcgetattr(STDIN_FILENO, &oldattr);
+  newattr=oldattr;
+  newattr.c_lflag &= ~(ICANON | ECHO);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
+  
+  array[0]=getchar();
+  int i=0;
+  while ((array[i] != '\n') || (i != 3))
+  {
+    i++;
+    array[i]=getchar();
+  }
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldattr); 
+}
 
 void update_coords (int key)
 {

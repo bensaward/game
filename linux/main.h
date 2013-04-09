@@ -59,10 +59,13 @@ void sprint_terminal(char* buffer, int size);
 void sprint_tok_terminal(char* to_print, int size);
 
 void update_cursor(int pressed); //functions from keys.c here
+int get_ansi_key(int array[3]);
 int getch (void);
 int extended_key(int pressed);
 void update_coords(int key);
 int wait_for_enter(int key);
+
+int arraycpy (int dest[], int source[], int dest_number); // functions from array.c here
 
 int rand_int(unsigned int min, unsigned int max); // functions from prng.c here
 
