@@ -113,6 +113,7 @@ void sprint_terminal(char* to_print, int size)
 {
   int char_number;
   int number_buffers=size/(array_width-7), char_left_over=size%(array_width-7);
+
   if(size>(array_width-4))
   {
     for (int i=0; i<number_buffers; i++)
@@ -128,6 +129,7 @@ void sprint_terminal(char* to_print, int size)
       int key_pressed=getch();
       wait_for_enter(key_pressed);
     }
+    
     clean_terminal();
     for (int i=0; i<char_left_over; i++)
     { 
@@ -140,7 +142,7 @@ void sprint_terminal(char* to_print, int size)
   else
   {
     clean_terminal();
-    for (int i=0; i<sizeof(to_print); i++)
+    for (int i=0; i<size; i++)
     {
       printf("\033[%d;%dH%c", array_height+3, i+4, to_print[i]);
     }
