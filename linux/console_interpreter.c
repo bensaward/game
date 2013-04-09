@@ -6,6 +6,7 @@
 void escape_to_terminal(void)
 {
   clean_terminal();
+  int error_check=0;
   arg_count=0;
   char entered_commands[256], *argument, *newline;
   char error_msg[]="Argument exceeded the accepted size of 15 letters";
@@ -48,11 +49,15 @@ void escape_to_terminal(void)
       else
       {
         sprint_tok_terminal(error_msg, sizeof(error_msg));
+	error_check=1;
         break;
       }
       argument=strtok(NULL, " ");
     }
-    interpret_args(argument_array, arg_count);
+    if (error_check != 1)
+    {
+      interpret_args(argument_array, arg_count);
+    }
   }
   
   else
@@ -65,8 +70,12 @@ void escape_to_terminal(void)
     else
     {
       sprint_tok_terminal(error_msg, sizeof(error_msg));
+      error_check=1;
     }
-    interpret_arg (argument_array);
+    if (error_check != 1)
+    {
+      interpret_arg (argument_array);
+    }
   }
 }
 
@@ -93,12 +102,12 @@ void interpret_args ( char arguments[][16], int argument_number)
   sprint_tok_terminal(interpreter_unrecognised, strlen(interpreter_unrecognised));
 }
 
-void interpret_arg ( char *arguments)
+void interpret_arg (char *arguments)
 {
-  char interpreter_unrecognised[100]="Sorry I did not recognise the word: ";
-  int quit;
+  char interpreter_unrecognised[100]="Sorry I did not recognise the word: "; 
+  int quit, len_interpreter_unrecognised=strlen(interpreter_unrecognised), len_arguments=strlen(arguments);
   
-  quit=strncmp(arguments, "quit", sizeof(arguments));
+  quit=strncmp(arguments, "quit", 4);
    
   if (quit == 0)
   {
@@ -108,7 +117,7 @@ void interpret_arg ( char *arguments)
   else
   {
     strncat(interpreter_unrecognised, arguments, sizeof(interpreter_unrecognised));
-    sprint_tok_terminal(interpreter_unrecognised, strlen(interpreter_unrecognised));
+    sprint_tok_terminal(interpreter_unrecognised, len_arguments+len_interpreter_unrecognised+1);
   }
    
 }
