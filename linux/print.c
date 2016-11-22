@@ -12,12 +12,12 @@ void print(int x, int y)
     if(y==coordinate_y)
     {
       char_printed=1;
-      printed='@';      
+      printed='@';
     }
     else
     {
-      printed='.';  
-    } 
+      printed='.';
+    }
   }
   else
   {
@@ -25,7 +25,7 @@ void print(int x, int y)
   }
   if(x==array_width)
   {
-    printf("%c\n", printed); 
+    printf("%c\n", printed);
   }
   else
   {
@@ -49,7 +49,7 @@ void draw_screen ()
     for (int x=1; x<=array_width; x++)
     {
       print(x, y);
-      
+
     }
   }
   printf("\n");
@@ -96,9 +96,9 @@ void print_terminal(void)
   for (int x=0; x<array_width; x++)
   {
     printf("\033[%d;%dH-", array_height+2, x);
-    printf("\033[%d;%dH-", array_height+4, x);   
+    printf("\033[%d;%dH-", array_height+4, x);
   }
-  printf("\033[%d;1H>> ", array_height+3);  
+  printf("\033[%d;1H>> ", array_height+3);
 }
 
 void clean_terminal(void)
@@ -129,10 +129,10 @@ void sprint_terminal(char* to_print, int size)
       int key_pressed=getch();
       wait_for_enter(key_pressed);
     }
-    
+
     clean_terminal();
     for (int i=0; i<char_left_over; i++)
-    { 
+    {
       printf("\033[%d;%dH%c", array_height+3, i+4, to_print[char_number]);
       char_number++;
     }
@@ -153,21 +153,29 @@ void sprint_tok_terminal(char* to_print, int size)
 {
   clean_terminal();
   char token[size/2][16];
-  char *result;    
+  char *result;
   int buffer_number, total_chars=0, token_number=0, token_size[size/2], print_head=4, char_remaining, end_tok;
- 
+
   result=strtok(to_print, " ");
-    
-  while (result != NULL)
+  while (total_chars+strlen(result) <= size) //successfully debugged
   {
     strncpy(token[token_number], result, sizeof(token[token_number]));
-    token_size[token_number]=(strlen(token[token_number])+1);
+    token_size[token_number]=(strlen(token[token_number])+1); //+1 for space
     total_chars+=token_size[token_number];
-    token_number++;
-    result=strtok(NULL, " ");
+    if (total_chars >= size)
+    {
+        break;
+    }
+    else
+    {
+        result=strtok(NULL, " "); //increment pointer
+        token_number++;
+    }
+
   }
-  
-  if (total_chars<=(array_width-3))
+  //getch();
+
+ if (total_chars<=(array_width-3))
   {
     for (int i=0; i<token_number; i++)
     {
@@ -185,10 +193,11 @@ void sprint_tok_terminal(char* to_print, int size)
       end_tok=(3+token_size[word_number]);
       while (end_tok <=(array_width-3))
       {
-	printf("\033[%d;%dH%s", array_height+3, print_head, token[word_number]);
-	print_head+=token_size[word_number];
-	word_number++;
-	end_tok+=token_size[word_number];
+        printf("\033[%d;%dH%s", array_height+3, print_head, token[word_number]);
+        print_head+=token_size[word_number];
+        word_number++;
+        if (word_number>token_number) {break;}
+        else{end_tok+=token_size[word_number];}
       }
       printf("\033[%d;%dH...", array_height+3, array_width-3);
       int key_caught=getch();

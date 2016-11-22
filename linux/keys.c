@@ -30,15 +30,15 @@ void update_coords (int key)
       coordinate_y--;
     }
   }
-  
+
   if(key==left_key)
-  {   
+  {
     if (coordinate_x!=1)
     {
-      coordinate_x--;  
+      coordinate_x--;
     }
   }
-  
+
   if(key==down_key)
   {
     if (coordinate_y!=array_height)
@@ -52,9 +52,9 @@ void update_coords (int key)
     if (coordinate_x!=array_width)
       {
 	coordinate_x++;
-      }    
+      }
   }
-  
+
   if(key==27) //code for ESC
   {  //TODO: add escape key to the config file
     escape_to_terminal();
@@ -80,7 +80,7 @@ void update_cursor(int pressed)
 	break;
       }
     }
-    
+
     case arrow_down:
     {
       if (cursor_y!=6)
@@ -93,7 +93,7 @@ void update_cursor(int pressed)
 	break;
       }
     }
-   
+
     case enter_key:
     {
       switch(cursor_y)
@@ -101,7 +101,7 @@ void update_cursor(int pressed)
 	case 2:
 	  loop_campaign_menu();
 	  break;
-	  
+
 	case 4:
 	  system("clear");
 	  printf("\033[1;1H");
@@ -109,7 +109,7 @@ void update_cursor(int pressed)
 	  getch();
 	  loop_menu();
 	  break;
-	  
+
 	case 6:
 	  printf("\n\n");
 	  exit(0);
@@ -134,7 +134,7 @@ int wait_for_enter(int key)
       return 0;
       break;
     }
-    
+
     default:
     {
       int pressed=getch();
