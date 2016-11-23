@@ -11,7 +11,7 @@ void print(int x, int y)
   {
     if(y==coordinate_y)
     {
-      char_printed=1;
+      //char_printed=1;
       printed='@';
     }
     else
@@ -41,7 +41,7 @@ void redraw_screen ()
   printf("\033[%d;4H", array_height+3);
 }
 
-void draw_screen ()
+void draw_screen()
 {
   system("clear");
   for (int y=1; y<=array_height; y++)
@@ -52,7 +52,7 @@ void draw_screen ()
 
     }
   }
-  printf("\n");
+  //printf("done printing\n");
   print_terminal();
 }
 
@@ -91,12 +91,17 @@ void print_n_xml(char *file_path, int buffer_size)
   }
 }
 
-void print_terminal(void)
+void print_terminal()
 {
-  for (int x=0; x<array_width; x++)
+    printf("\033[%d;1H", array_height+2);
+  for (int x=1; x<=array_width; x++)
   {
-    printf("\033[%d;%dH-", array_height+2, x);
-    printf("\033[%d;%dH-", array_height+4, x);
+    printf("-");
+  }
+    printf("\033[%d;1H", array_height+4);
+   for (int x=1; x<=array_width; x++)
+  {
+    printf("-");
   }
   printf("\033[%d;1H>> ", array_height+3);
 }

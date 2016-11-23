@@ -53,7 +53,7 @@ void print(int x, int y);
 void redraw_screen();
 void draw_screen();
 void print_n_xml(char *file_path, int buffer_size);
-void print_terminal(void);
+void print_terminal();
 void clean_terminal(void);
 void sprint_terminal(char* buffer, int size);
 void sprint_tok_terminal(char* to_print, int size);

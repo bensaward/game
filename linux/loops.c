@@ -8,8 +8,9 @@ void loop_campaign(char* name)
   intro_loop(name);
   init_coords();
   draw_screen();
-  get_config();
-  
+  //printf("\033[%d;4Hfinished drawing screen!", array_height+3);
+  get_config(); //<== SIGSEV HERE
+
   for(;;)
   {
     character_pressed=getch();
@@ -62,7 +63,7 @@ void loop_campaign_menu()
 	  break;
 	}
       }
-      
+
       case arrow_up:
       {
 	if (print_height != 2)
@@ -79,7 +80,7 @@ void loop_campaign_menu()
 	  break;
 	}
       }
-      
+
       case enter_key:
       {
 	loop_campaign(menu_items[(print_height/2)-1]);
@@ -117,5 +118,4 @@ void intro_loop(char *campaign)
     loop_campaign_menu();
   }
 }
-    
-    
+

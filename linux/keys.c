@@ -19,7 +19,7 @@ int getch(void)
 }
 
 
-void update_coords (int key)
+void update_coords (int key) //compare to update_cursor which we know works
 {
   old_x=coordinate_x;
   old_y=coordinate_y;

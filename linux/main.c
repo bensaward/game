@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <main.h>
 
-/* 
+/*
  * See main.h for defining array size etc.
  * Functions are found in various *.c files.
  * Also see main.h for which *.c files.
